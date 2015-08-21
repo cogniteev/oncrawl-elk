@@ -1,0 +1,1 @@
+FROM cogniteev/elk-logstash

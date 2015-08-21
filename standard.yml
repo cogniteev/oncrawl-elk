@@ -1,0 +1,21 @@
+# store Logstash data and Kibana configuration
+elasticsearch:
+  image: elasticsearch:1.7.1
+
+logstash:
+  build: logstash
+  links:
+    - elasticsearch
+
+# Bootstrap .kibana index with default config
+kibana-config:
+  build: kibana-config
+  links:
+    - elasticsearch
+
+kibana:
+  build: kibana
+  links:
+    - elasticsearch
+  environment:
+    WAIT_KIBANA_INDEX: yes
