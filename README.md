@@ -3,7 +3,7 @@ Elasticsearch/Logstash/Kibana application.
 
 ### How to use it?
 
-1. Fork the repository
+1. Fork this repository
 1. Add your application configuration
 1. Launch it!
 
@@ -16,29 +16,24 @@ files. Just keep in mind that they will be stored in the `/config` directory.
 For instance, if your have the following config:
 
 ```
-/logstash/logstash.conf
+/logstash/50-filter-nginx.conf
 /logstash/patterns/google_user_agents
 /logstash/patterns/nginx
 ```
 
-You may reference those patterns in logstash.conf as follow:
+You may reference those patterns in 50-filter-nginx.conf as follow:
 
 ```
-input {
-  file {
-    'path' => '/logs/apache/access.log'
-    'type' => 'apache'
-  }
-}
-
 filter {
-	if [type] == "nginx" {
-		grok {
-		   patterns_dir => "/config/patterns"
-		   match => { "message" => "%{NGINXACCESS}" }
-		}
+	grok {
+	   patterns_dir => "/config/patterns"
+	   match => { "message" => "%{NGINXACCESS}" }
+	}
 }
 ```
+
+A default configuration is provided to listen for items on a syslog-like
+server running on port 10514 and push those items to Elasticsearch.
 
 ### Available *Makefile* targets
 
