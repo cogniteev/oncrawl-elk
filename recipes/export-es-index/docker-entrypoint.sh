@@ -2,7 +2,7 @@
 
 if [ "xES_INDEX" = x ] ;then
   echo >&2 <<EOF
-Error: Elasticsearch index to export is not specifie.
+Error: Elasticsearch index to export is not specified.
 Expecting ES_INDEX environment variable.
 Abort.
 EOF
