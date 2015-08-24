@@ -1,23 +1,25 @@
-# store Logstash data and Kibana configuration
 elasticsearch:
-  image: elasticsearch:1.7.1
+  extends:
+    file: common.yml
+    service: elasticsearch
 
 logstash:
-  build: logstash
+  extends:
+    file: common.yml
+    service: logstash
   links:
     - elasticsearch
-  ports:
-    - "514:10514"
 
-# Bootstrap .kibana index with default config
 kibana-config:
-  build: kibana-config
+  extends:
+    file: common.yml
+    service: kibana-config
   links:
     - elasticsearch
 
 kibana:
-  build: kibana
+  extends:
+    file: common.yml
+    service: kibana
   links:
     - elasticsearch
-  ports:
-    - "5601:5601"

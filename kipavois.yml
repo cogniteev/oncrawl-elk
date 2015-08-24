@@ -3,12 +3,12 @@
 
 elasticsearch:
   extends:
-    file: standard.yml
+    file: common.yml
     service: elasticsearch
 
 logstash:
   extends:
-    file: standard.yml
+    file: common.yml
     service: logstash
   links:
     - elasticsearch
@@ -23,14 +23,14 @@ kipavois:
 
 kibana-config:
   extends:
-    file: standard.yml
+    file: common.yml
     service: kibana-config
   links:
     - elasticsearch
 
 kibana:
   extends:
-    file: standard.yml
+    file: common.yml
     service: kibana
   links:
     - kipavois:elasticsearch

@@ -1,0 +1,17 @@
+# store Logstash data and Kibana configuration
+elasticsearch:
+  image: elasticsearch:1.7.1
+
+logstash:
+  build: logstash
+  ports:
+    - "514:10514"
+
+# Bootstrap .kibana index with default config
+kibana-config:
+  build: kibana-config
+
+kibana:
+  build: kibana
+  ports:
+    - "5601:5601"
