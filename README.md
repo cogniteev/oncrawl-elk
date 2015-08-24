@@ -58,6 +58,25 @@ with the following utility:
 3. docker copy
 ```
 
+### Available applications
+
+This project provides a couple of use-cases.
+
+### Standard application
+
+Docker Compose input file: `standard.yml`
+
+![container dependencies](doc/standard.png)
+
+### Kipavois application
+
+KiPavois is an HTTP proxy rewriting Elasticsearch queries made by Kibana 4
+to provide data isolation across different users.
+
+Docker Compose input file: `kipavois.yaml`
+
+![container dependencies](doc/kipavois.png)
+
 ### Available *Makefile* targets
 
 #### env
@@ -89,7 +108,7 @@ default behavior.
 
 Name | Default | Description
 -----|---------|------------
-ELK_APP | elk | Docker container common prefix
+ELK_APP | elk | Docker containers prefix
 ELK_CONFIG | standard.yml | path to docker-compose input file
 DOCKER_COMPOSE | docker-compose | path to docker-compose executable
 
