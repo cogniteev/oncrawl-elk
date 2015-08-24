@@ -9,7 +9,7 @@ Elasticsearch/Logstash/Kibana application.
 
 #### Logstash
 
-Add your configuration files in the `/logstash` directory. Logstash files
+Add your configuration files in the `./logstash` directory. Logstash files
 may have the `.conf` extension. You can also add your patterns or any other
 files. Just keep in mind that they will be stored in the `/config` directory.
 
@@ -34,6 +34,29 @@ filter {
 
 A default configuration is provided to listen for items on a syslog-like
 server running on port 10514 and push those items to Elasticsearch.
+
+### Kibana configuration
+
+The `./kibana-config` allows you to deploy a Kibana configuration the first
+time you application is launched.
+To do that, simply put an
+(elasticdump)[https://www.npmjs.com/package/elasticdump] json export
+of the *.kibana* Elasticsearch index in this directory. Json files must have
+the following names:
+
+* `./kibana-config/mapping.json`
+* `./kibana-config/data.json`
+
+If files are missing, Kibana will simply start with an empty configuration.
+You can then prepare your application by creating your *saved searchs*,
+*virtualizations*, and *dashboards*, and then export the configuration to Json
+with the following utility:
+
+```shell
+1. laucn container and creating json files inside it
+2. docker commit (or whatever required)
+3. docker copy
+```
 
 ### Available *Makefile* targets
 
