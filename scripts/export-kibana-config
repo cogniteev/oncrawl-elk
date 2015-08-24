@@ -1,0 +1,25 @@
+#!/bin/sh -e
+
+pushd `dirname $0` > /dev/null
+SCRIPTPATH=`pwd`
+popd > /dev/null
+ROOT_DIR=$(cd "$SCRIPTPATH/.."; pwd)
+
+es_container=`(cd "$ROOT_DIR" && make ps) | tail -n +3 | awk '{print $1}' | grep '_elasticsearch_1$'`
+export_container="export-kibana-index-$$"
+export_image="cogniteev/elk-export-es-index:latest"
+
+docker run                              \
+  -e "ES_INDEX=.kibana"                 \
+  --link "$es_container:elasticsearch"  \
+  --name "$export_container"            \
+  "$export_image"
+
+docker commit "$export_container"
+for json in mapping data; do
+  docker cp \
+    "$export_container:/data/.kibana-$json.json" \
+    "$ROOT_DIR/kibana-config/$json.json"
+done
+docker rm "$export_container"
+echo "Both data and mapping of .kibana index have been copied in ./kibana-config"

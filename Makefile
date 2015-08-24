@@ -4,7 +4,8 @@ DOCKER_COMPOSE ?= docker-compose
 
 EXTRA_IMAGES = 												\
 	cogniteev/elk-kibana-config:latest 	\
-	cogniteev/elk-logstash:latest
+	cogniteev/elk-logstash:latest 			\
+	cogniteev/elk-export-es-index
 
 ps:
 	@$(DOCKER_COMPOSE) -p $(ELK_APP) -f $(ELK_CONFIG) $@

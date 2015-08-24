@@ -16,6 +16,8 @@ fi
 
 ES_URL="http://elasticsearch:${ELASTICSEARCH_PORT_9200_TCP_PORT}"
 
+mkdir -p /data
+
 elasticdump                                 \
   --input="${ES_URL}/${ES_INDEX}"           \
   --output="/data/${ES_INDEX}-mapping.json" \

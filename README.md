@@ -53,10 +53,14 @@ You can then prepare your application by creating your *saved searchs*,
 with the following utility:
 
 ```shell
-1. laucn container and creating json files inside it
-2. docker commit (or whatever required)
-3. docker copy
+scripts/export-kibana-config
 ```
+
+The script leverages `*cogniteev/elk-export-es-index` image to export
+**.kibana** index in a container under JSON format. Then it uses
+`docker cp` commands to retrieve the JSON files back to your workstation.
+
+Note: the Elasticsearch container of your application must be running.
 
 ### Available applications
 
