@@ -1,5 +1,5 @@
-ELK_APP ?= elk
-ELK_CONFIG ?= standard.yml
+export ELK_APP ?= elk
+export ELK_CONFIG ?= standard.yml
 DOCKER_COMPOSE ?= docker-compose
 
 EXTRA_IMAGES = 												\
