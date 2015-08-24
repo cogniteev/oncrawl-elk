@@ -40,7 +40,7 @@ server running on port 10514 and push those items to Elasticsearch.
 The `./kibana-config` allows you to deploy a Kibana configuration the first
 time you application is launched.
 To do that, simply put an
-(elasticdump)[https://www.npmjs.com/package/elasticdump] json export
+[Elasticdump](https://www.npmjs.com/package/elasticdump) json export
 of the *.kibana* Elasticsearch index in this directory. Json files must have
 the following names:
 
@@ -53,18 +53,23 @@ You can then prepare your application by creating your *saved searchs*,
 with the following utility:
 
 ```shell
-scripts/export-kibana-config
+$ scripts/export-kibana-config
 ```
 
-The script leverages `*cogniteev/elk-export-es-index` image to export
-**.kibana** index in a container under JSON format. Then it uses
+The script leverages [*cogniteev/elk-export-es-index*](https://hub.docker.com/r/cogniteev/elk-export-es-index/) Docker image to export
+*.kibana* index in a container under JSON format. Then it uses
 `docker cp` commands to retrieve the JSON files back to your workstation.
 
 Note: the Elasticsearch container of your application must be running.
 
 ### Available applications
 
-This project provides a couple of use-cases.
+This project provides a couple of use-cases. In both cases the exposed ports
+are the following:
+
+* 5601 port is bound to the Kibana front-end application.
+* 514 port is bound to the Logstash syslog server.
+
 
 ### Standard application
 
