@@ -6,6 +6,9 @@ EXTRA_IMAGES = 												\
 	cogniteev/elk-kibana-config:latest 	\
 	cogniteev/elk-logstash:latest
 
+ps:
+	@$(DOCKER_COMPOSE) -p $(ELK_APP) -f $(ELK_CONFIG) $@
+
 env:
 	@echo alias dc-$(ELK_APP)=\"$(DOCKER_COMPOSE) -p ''\''$(ELK_APP)'\''' -f ''\''$(PWD)/$(ELK_CONFIG)'\'''\"
 
