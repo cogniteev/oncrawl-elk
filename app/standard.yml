@@ -17,5 +17,3 @@ kibana:
   build: kibana
   links:
     - elasticsearch
-  environment:
-    WAIT_KIBANA_INDEX: yes
