@@ -11,22 +11,23 @@ Docker based application.
 
 Add your configuration files in the `./logstash` directory. Logstash files
 may have the `.conf` extension. You can also add your patterns or any other
-files. Just keep in mind that they will be stored in the `/config` directory.
+files. Just keep in mind that they will be stored in the `/etc/logstash/`
+directory.
 
-For instance, if your have the following config:
+For instance, if you have the following config files:
 
 ```
-/logstash/50-filter-nginx.conf
-/logstash/patterns/google_user_agents
-/logstash/patterns/nginx
+./logstash/conf.d/50-filter-nginx.conf
+./logstash/patterns/google_user_agents
+./logstash/patterns/nginx
 ```
 
-You may reference those patterns in 50-filter-nginx.conf as follow:
+You may reference those patterns in `50-filter-nginx.conf` as follow:
 
 ```
 filter {
 	grok {
-	   patterns_dir => "/config/patterns"
+	   patterns_dir => "/etc/logstash/patterns"
 	   match => { "message" => "%{NGINXACCESS}" }
 	}
 }

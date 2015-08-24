@@ -1,4 +1,4 @@
 FROM logstash:1.5.3
 
-ONBUILD ADD . /config
-CMD ["logstash", "-f", "/config/*.conf"]
+ONBUILD ADD . /etc/logstash/
+CMD ["logstash", "-f", "/etc/logstash"]
