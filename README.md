@@ -1,5 +1,5 @@
-`Docker ELK` provides pillars of a Docker based
-Elasticsearch/Logstash/Kibana application.
+`Docker ELK` provides pillars of a Elasticsearch/Logstash/Kibana
+Docker based application.
 
 ### How to use it?
 
