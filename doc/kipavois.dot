@@ -1,0 +1,9 @@
+digraph G {
+  graph[rankdir=RL]
+  node[shape=none]
+  elasticsearch -> kipavois;
+  elasticsearch -> logstash;
+  kipavois -> kibana
+  elasticsearch -> kibanaConfig
+  kibanaConfig [label="kibana-config"]
+}
