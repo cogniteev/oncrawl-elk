@@ -8,7 +8,7 @@ EXTRA_IMAGES = 												\
 	cogniteev/elk-logstash:latest 			\
 	cogniteev/elk-export-es-index
 
-ps logs rm kill:
+ps logs rm kill stop:
 	@$(DOCKER_COMPOSE) -p $(ELK_APP) -f $(ELK_CONFIG) $@
 
 env:
