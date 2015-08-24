@@ -5,7 +5,7 @@ elasticsearch:
 logstash:
   build: logstash
   ports:
-    - "514:10514"
+    - "514:514"
 
 # Bootstrap .kibana index with default config
 kibana-config:

@@ -12,8 +12,6 @@ logstash:
     service: logstash
   links:
     - elasticsearch
-  ports:
-    - "514:10514"
 
 kipavois:
   image: cogniteev/kipavois:0.0.2
@@ -34,5 +32,3 @@ kibana:
     service: kibana
   links:
     - kipavois:elasticsearch
-  ports:
-    - "5601:5601"
