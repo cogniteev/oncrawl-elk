@@ -1,0 +1,36 @@
+# see https://github.com/cogniteev/kipavois, an HTTP proxy rewriting
+# Elasticsearch queries made by Kibana 4 to filter documents the user owns
+
+elasticsearch:
+  extends:
+    file: standard.yml
+    service: elasticsearch
+
+logstash:
+  extends:
+    file: standard.yml
+    service: logstash
+  links:
+    - elasticsearch
+
+kipavois:
+  image: cogniteev/kipavois:0.0.2
+  # command: npm start -- -f <TERM_FIELD>
+  links:
+    - elasticsearch
+
+kibana-config:
+  extends:
+    file: standard.yml
+    service: kibana-config
+  links:
+    - elasticsearch
+
+kibana:
+  extends:
+    file: standard.yml
+    service: kibana
+  links:
+    - kipavois:elasticsearch
+  ports:
+    - "5601:5601"
