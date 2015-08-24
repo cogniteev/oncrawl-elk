@@ -110,6 +110,14 @@ dc-elk is aliased to `docker-compose -p 'elk' -f 'standard.yml''
 
 Retrieves latest version of all Docker images used by this Docker Compose application.
 
+#### up
+
+Run containers in the background. Equivalent to `docker-compose up -d`
+
+### wait
+
+Wait for the *kibana* container to stop.
+
 ### Available *Makefile* options
 
 Here are the environment variables that can be passed to `make` to customize
