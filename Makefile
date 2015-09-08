@@ -1,4 +1,4 @@
-export ELK_APP ?= elk
+export ELK_APP ?= oncrawlelk
 export ELK_CONFIG ?= standard.yml
 DOCKER_COMPOSE ?= docker-compose
 DOCKER ?= docker

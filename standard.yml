@@ -9,6 +9,8 @@ logstash:
     service: logstash
   links:
     - elasticsearch
+  volumes:
+    - ./logs:/logs
 
 kibana-config:
   extends:
