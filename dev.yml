@@ -1,0 +1,28 @@
+# Elasticsearch with exposed port and custom heap size
+elasticsearch:
+  image: elasticsearch:1.7.1
+  environment:
+    ES_HEAP_SIZE: 1G
+  ports:
+    - "9200:9200"
+
+logstash:
+  build: logstash
+  links:
+    - elasticsearch
+  volumes:
+    - ./logs:/logs
+
+# Kibana index initializer
+kibana-config:
+  build: kibana-config
+  links:
+    - elasticsearch
+
+# Kibana with modified entry point to wait for index initialization
+kibana:
+  build: kibana
+  links:
+    - elasticsearch
+  ports:
+    - "5601:5601"
