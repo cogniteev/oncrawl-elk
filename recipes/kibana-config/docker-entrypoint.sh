@@ -3,9 +3,11 @@
 CONFIG_DIR=/kibana-config
 
 put_status() {
+  echo "status => $1"
   curl -s -XPUT elasticsearch:9200/.kibana-config/status/init -d "{
     \"status\": \"$1\"
   }" >/dev/null 2>&1
+  curl -s -XPOST 'http://elasticsearch:9200/.kibana-config/status/_flush' -d '{}'
 }
 
 error() {
