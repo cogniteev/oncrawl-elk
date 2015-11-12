@@ -1,3 +1,3 @@
-FROM kibana:4.2.0
+FROM cogniteev/elk-kibana
 
 COPY ./docker-entrypoint.sh /
