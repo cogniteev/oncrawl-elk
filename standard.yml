@@ -25,3 +25,9 @@ kibana:
     service: kibana
   links:
     - elasticsearch
+
+nginx:
+  extends:
+    file: common.yml
+    service: nginx
+

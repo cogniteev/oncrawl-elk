@@ -32,3 +32,8 @@ kibana:
     service: kibana
   links:
     - kipavois:elasticsearch
+
+nginx:
+  extends:
+    file: common.yml
+    service: nginx
