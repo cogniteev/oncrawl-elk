@@ -26,8 +26,7 @@ kibana:
   links:
     - elasticsearch
 
-nginx:
+web-client:
   extends:
     file: common.yml
-    service: nginx
-
+    service: web-client
