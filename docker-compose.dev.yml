@@ -8,7 +8,7 @@ elasticsearch:
   environment:
     ES_HEAP_SIZE: 1G
   ports:
-    - "9200:9200"    
+    - "9200:9200"
 
 logstash:
   build: recipes/logstash

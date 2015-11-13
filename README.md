@@ -7,14 +7,14 @@ It is built with standard pillars such as ELK and docker.
 #### Prerequisites
 
 1. [Install Docker with Docker Compose](https://docs.docker.com/compose/install/)
-2. Locate your server logs copy them to the machine where you are going to run OnCrawl ELK.
+1. Locate your server logs copy them to the machine where you are going to run OnCrawl ELK.
 30 days is generally fine. If you have very large log file, start with 1 or 2 days.
 
 #### Install
 
 1. [Download ZIP](https://github.com/cogniteev/oncrawl-elk/archive/master.zip) or Fork this repository
-2. Starts the `OnCrawl ELK` containers using Docker Compose: `docker-compose -p oncrawlelk -f docker-compose.yml up -d`
-3. Visit [http://localhost:9000](http://localhost:9000) or `http://docker-host-ip:9000`. You can see the dashboard, but there is no data yet. Let's bring some data to analyze.
+1. Starts the `OnCrawl ELK` containers using Docker Compose: `docker-compose -p oncrawlelk -f docker-compose.yml up -d`
+1. Visit [http://localhost:9000](http://localhost:9000) or `http://docker-host-ip:9000`. You can see the dashboard, but there is no data yet. Let's bring some data to analyze.
 
 #### Import log files
 
