@@ -13,8 +13,8 @@ It is built with standard pillars such as ELK and docker.
 #### Install
 
 1. [Download ZIP](https://github.com/cogniteev/oncrawl-elk/archive/master.zip) or Fork this repository
-1. With docker compose, start `standard.yml`
-1. Visit [http://localhost:8080](http://localhost:8080) or `http://docker-host-ip:8080`. You can see the dashboard, but there is no data yet. Let's bring some data to analyze.
+2. Starts the `OnCrawl ELK` containers using Docker Compose: `docker-compose -p oncrawlelk -f docker-compose.yml up -d`
+3. Visit [http://localhost:9000](http://localhost:9000) or `http://docker-host-ip:9000`. You can see the dashboard, but there is no data yet. Let's bring some data to analyze.
 
 #### Import log files
 
@@ -37,7 +37,7 @@ and drop your `.log` files into the `logs/iis` directory.
 
 #### Play
 
-Go back to [http://localhost:8080](http://localhost:8080) or `http://docker-host-ip:8080`. You should have figures and graphs, congrats !
+Go back to [http://localhost:9000](http://localhost:9000) or `http://docker-host-ip:9000`. You should have figures and graphs, congrats !
 If the graphs are still empty, make sure to select the date windows matching your log files.
 
 
