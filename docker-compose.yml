@@ -1,0 +1,37 @@
+# Elasticsearch with exposed port and custom heap size
+elasticsearch:
+  image: elasticsearch:2.0.0
+  command:
+    - "elasticsearch"
+    - "--network.host"
+    - "0.0.0.0"
+  environment:
+    ES_HEAP_SIZE: 1G
+  ports:
+    - "9200:9200"    
+
+logstash:
+  image: oncrawl-elk-logstash
+  links:
+    - elasticsearch
+  volumes:
+    - ./logs:/logs
+
+# Kibana index initializer
+kibana-config:
+  image: oncrawl-elk-kibana-config
+  links:
+    - elasticsearch
+
+# Kibana with modified entry point to wait for index initialization
+kibana:
+  image: oncrawl-elk-kibana
+  links:
+    - elasticsearch
+  ports:
+    - "5601:5601"
+
+web-client:
+  build: oncrawl-elk-web-client
+  ports:
+    - "9000:80"

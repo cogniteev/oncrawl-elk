@@ -1,8 +1,8 @@
-This directory provides Docker recipes used by docker-elk, tracked by Docker Hub.
+This directory provides Docker recipes used by oncrawl-elk, tracked by Docker Hub.
 
-* [cogniteev/elk-export-es-index](https://hub.docker.com/r/cogniteev/elk-export-es-index/): export Elasticsearch config and data in json files.
-* [cogniteev/elk-kibana-config](https://hub.docker.com/r/cogniteev/elk-kibana-config/): Base Kibana 4 image
-* [cogniteev/elk-logstash](https://hub.docker.com/r/cogniteev/elk-logstash/): Base Logstash image
-* [cogniteev/oncrawl-elk-web-client](https://hub.docker.com/r/cogniteev/oncrawl-elk-web-client/): OnCrawl for ELK Web Client
+* [cogniteev/oncrawl-elk-logstash](https://hub.docker.com/r/cogniteev/oncrawl-elk-logstash/): OnCrawl's default configuration for logstash
+* [cogniteev/oncrawl-elk-kibana-config](https://hub.docker.com/r/cogniteev/oncrawl-elk-kibana-config/): OnCrawl's configuration container for Kibana
+* [cogniteev/oncrawl-elk-kibana](https://hub.docker.com/r/cogniteev/oncrawl-elk-kibana/): OnCrawl's Kibana container
+* [cogniteev/oncrawl-elk-web-client](https://hub.docker.com/r/cogniteev/oncrawl-elk-web-client/): OnCrawl's web client
 
 Those are the base Docker images of images build by Docker Compose.

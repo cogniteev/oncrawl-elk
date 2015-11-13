@@ -1,8 +1,0 @@
-digraph G {
-  graph[rankdir=RL]
-  node[shape=none]
-  elasticsearch -> logstash
-  elasticsearch -> kibana
-  elasticsearch -> kibanaConfig
-  kibanaConfig [label="kibana-config"]
-}

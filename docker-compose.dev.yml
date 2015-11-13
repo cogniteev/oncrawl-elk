@@ -11,7 +11,7 @@ elasticsearch:
     - "9200:9200"    
 
 logstash:
-  build: logstash
+  build: recipes/logstash
   links:
     - elasticsearch
   volumes:
@@ -19,19 +19,19 @@ logstash:
 
 # Kibana index initializer
 kibana-config:
-  build: kibana-config
+  build: recipes/kibana-config
   links:
     - elasticsearch
 
 # Kibana with modified entry point to wait for index initialization
 kibana:
-  build: kibana
+  build: recipes/kibana
   links:
     - elasticsearch
   ports:
     - "5601:5601"
 
 web-client:
-  build: ./recipes/web-client
+  build: recipes/web-client
   ports:
     - "9000:80"
