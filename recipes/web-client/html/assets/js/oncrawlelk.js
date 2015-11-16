@@ -279,12 +279,11 @@ $(function() {
      * Html handling
      */
 
-    function buildUrl(id, params) {
-        return Config.kibana.url +
-                '#/visualize/edit/' + id + '?embed&' +
-                params
-                    .replace('$from', Config.startingDate + 'T00:00:00.000Z')
-                    .replace('$to', Config.endingDate + 'T23:59:59.999Z');
+    function buildUrl(id) {
+        var ctx = "time:(from:'$from',mode:quick,to:'$to')"
+                .replace('$from', Config.startingDate + 'T00:00:00.000Z')
+                .replace('$to', Config.endingDate + 'T23:59:59.999Z');
+        return Config.kibana.url + '#/visualize/edit/' + id + '?embed&_g=(' + ctx + ')';
     }
 
     function getWidgetHtml(widget) {
@@ -294,7 +293,7 @@ $(function() {
             '    <span>' + widget.title + '</span>' +
             '  </div>' +
             '  <div class="widget-content">',
-            '    <iframe src="' + buildUrl(widget.id, widget.params) + '"></iframe>',
+            '    <iframe src="' + buildUrl(widget.id) + '"></iframe>',
             '  </div>',
             '</li>'
         ].join("\n");
