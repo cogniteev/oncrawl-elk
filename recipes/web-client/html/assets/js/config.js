@@ -1,6 +1,6 @@
 var Config = {
     kibana: {
-        url: '/kibana'
+        url: '/app/kibana'
     },
     startingDate: undefined,
     endingDate: undefined,
