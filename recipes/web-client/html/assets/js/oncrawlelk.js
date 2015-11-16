@@ -1,5 +1,18 @@
 $(function() {
 
+    /*
+     * Hash helper
+     */
+
+    function getHashQueryString() {
+        var hash = window.location.hash, qs = hash.indexOf('?');
+        return qs == -1 ? '' : hash.substr(qs + 1);
+    }
+
+    function getHashPath() {
+        var hash = window.location.hash, qs = hash.indexOf('?');
+        return qs == -1 ? hash : hash.substr(0, qs);
+    }
 
     /*
      * Date form handling
@@ -32,8 +45,14 @@ $(function() {
     }
 
     function initDatesByDefault() {
-        Config.endingDate = new Date().dateFormat(configFormat);
-        Config.startingDate = moment(new Date()).subtract('30', 'days').format(configFormat);
+        var dates = getHashQueryString().split(':');
+        if (dates.length == 2) {
+            Config.endingDate = dates[1];
+            Config.startingDate = dates[0];
+        } else {
+            Config.endingDate = new Date().dateFormat(configFormat);
+            Config.startingDate = moment(new Date()).subtract('30', 'days').format(configFormat);
+        }
     }
 
     function initForm() {
@@ -61,6 +80,7 @@ $(function() {
     function onSubmitForm(e) {
         Config.startingDate = toConfigFormat(getStartingDate());
         Config.endingDate = toConfigFormat(getEndingDate());
+        updateHashLocation();
         openPage(getId(getCurrentPage()));
         e.preventDefault();
         return false;
@@ -137,7 +157,7 @@ $(function() {
     }
 
     function openHashLocation() {
-        var hash = window.location.hash.split('/');
+        var hash = getHashPath().split('/');
         if (hash.length != 3) {
             return false;
         }
@@ -149,7 +169,11 @@ $(function() {
     }
 
     function updateHashLocation() {
-        window.location.hash = '#/' + getId(getCurrentCategory()) + '/' + getId(getCurrentPage());
+        var hash = '#/' + getId(getCurrentCategory()) + '/' + getId(getCurrentPage());
+        if (Config.startingDate != undefined && Config.endingDate != undefined) {
+            hash += '?' + Config.startingDate + ':' + Config.endingDate;
+        }
+        window.location.hash = hash;
     }
 
     function getId($item) {
