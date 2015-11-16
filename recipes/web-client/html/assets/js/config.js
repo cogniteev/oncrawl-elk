@@ -1,6 +1,6 @@
 var Config = {
     kibana: {
-        url: location.protocol + '//' + location.hostname + ':5601'
+        url: '/kibana'
     },
     startingDate: undefined,
     endingDate: undefined,

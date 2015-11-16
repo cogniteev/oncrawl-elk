@@ -33,5 +33,7 @@ kibana:
 
 web-client:
   build: recipes/web-client
+  links:
+    - kibana
   ports:
     - "9000:80"

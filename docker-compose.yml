@@ -29,5 +29,7 @@ kibana:
 
 web-client:
   image: cogniteev/oncrawl-elk-web-client
+  links:
+    - kibana
   ports:
     - "9000:80"
