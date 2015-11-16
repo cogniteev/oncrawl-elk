@@ -9,7 +9,7 @@ elasticsearch:
     ES_HEAP_SIZE: 1G
 
 logstash:
-  image: cogniteev/oncrawl-elk-logstash
+  image: quay.io/cogniteev/oncrawl-elk-logstash
   links:
     - elasticsearch
   volumes:
@@ -17,7 +17,7 @@ logstash:
 
 # Kibana index initializer
 kibana-config:
-  image: cogniteev/oncrawl-elk-kibana-config
+  image: quay.io/cogniteev/oncrawl-elk-kibana-config
   links:
     - elasticsearch
 
@@ -28,7 +28,7 @@ kibana:
     - elasticsearch
 
 web-client:
-  image: cogniteev/oncrawl-elk-web-client
+  image: quay.io/cogniteev/oncrawl-elk-web-client
   links:
     - kibana
   ports:
