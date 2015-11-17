@@ -1,4 +1,4 @@
-GOOGLEBOT_WEB Mozilla/5.0 \(compatible; Googlebot/2.1; \+http://www.google.com/bot.html\)
+GOOGLEBOT_WEB Mozilla/5.0[ +]\(compatible;[ +]Googlebot/2.1;[ +]\+http://www.google.com/bot.html\)
 GOOGLEBOT_MOBILE (Googlebot-Mobile|(iPhone|Android).*Googlebot)
 GOOGLEBOT_NEWS Googlebot-News
 GOOGLEBOT_IMAGE Googlebot-Image
