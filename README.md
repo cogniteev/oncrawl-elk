@@ -33,6 +33,7 @@ If your webserver is powered by IIS, you must select the right fields to export 
 #Fields: date time s-ip cs-method cs-uri-stem cs-uri-query s-port cs-username c-ip cs(User-Agent) cs(Referer)? cs-host? sc-status sc-substatus sc-win32-status time-taken
 ```
 ? denotes optionnal fields.
+
 Then copy your `.log` files into the `logs/iis` directory to have logstash analyze them.
 
 ###### other formats
@@ -40,25 +41,10 @@ If your logs have a different format and you cannot edit the output format to ma
 
 #### Play
 
-Go back to [http://localhost:9000](http://localhost:9000) or `http://docker-host-ip:9000`. You should have figures and graphs, congrats !
-If the graphs are still empty, make sure to select the date windows matching your log files.
+Go back to [http://localhost:9000](http://localhost:9000) or `http://docker-host-ip:9000`. You should have figures and graphs, __congrats !__
 
 
-#### Troubleshoot
-
- * __Connection refused to [http://localhost:9000](http://localhost:9000)__
-
- Check that the logstash web-client is started properly with kitematic, or with the command:
-
- ```docker-compose -p oncrawlelk -f docker-compose.yml ps```
-
-If docker is running in a VM, which is the case on OS X and Windows, make sure to replace `localhost` with the ip of the VM running docker.
-
-* __The web-client loads but frames are empty__
-
-* __The web-client loads all frames say no result__
-
-#### Going further
+### Going further
 
 ##### Exploring the `logstash.conf` file
 
@@ -81,6 +67,15 @@ At the end of filtering the event contains well structured fields, and enriched 
 In the ELK stack, the output of choice is elasticsearch.
 
 Notice the `document_id` field that allows to push an event twice while still having only one entry in elasticsearch. Duplicated events are automaticcaly deduplicated for better consistency.
+
+##### Modifying the `logstash.conf` file
+
+In order to modify logstash configuration, edit the files located at `recipes/logstash`. Then use the `docker-compose.dev.yml` compose file:
+
+```shell
+docker-compose -f docker-compose.dev.yml build
+docker-compose -f docker-compose.dev.yml up -d
+```
 
 ##### <a name="custom_logformat">Custom logformat</a>
 If you need to parse a log format that is not supported out of box by oncrawl elk, then you will need to edit the `logstash.conf` file in order to tell logstash and more specifically grok how to extract the relevant information for each line.
@@ -156,6 +151,39 @@ will produce this result:
  * http://www.example.com/article/123456789.html => "article"
  * http://www.example.com/news/123456789.html => "news"
  * http://www.example.com/article/quadcopter.html => "other"
+
+
+### Troubleshoot
+
+ * __Connection refused to [http://localhost:9000](http://localhost:9000)__
+
+ Check that the logstash web-client is started properly with kitematic, or with the command:
+
+ ```docker-compose -p oncrawlelk -f docker-compose.yml ps```
+
+If docker is running in a VM, which is the case on OS X and Windows, make sure to replace `localhost` with the ip of the VM running docker.
+
+* __The web-client loads but frames are empty__
+Make sure kibana is started using kitematic or this command: 
+
+```docker-compose -p oncrawlelk -f docker-compose.yml ps```
+
+You can issue a full restart with:
+
+```shell
+docker-compose -p oncrawlelk -f docker-compose.yml stop
+docker-compose -p oncrawlelk -f docker-compose.yml up -d
+```
+
+If required, delete the docker containers once stopped with:
+```shell
+docker-compose -p oncrawlelk -f docker-compose.yml rm
+```
+
+* __The web-client loads all frames say no result__
+  1. Make sure to select a date windows that match your log files
+  2. Analyze logstash log files with kitematic, or this command: ```docker-compose -p oncrawlelk -f docker-compose.yml ps```
+
 
 ### Purge
 
