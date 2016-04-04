@@ -4,78 +4,53 @@ body {
     margin: 0;
     background-color: rgb(240, 243, 246);
     font-family: 'Open Sans', 'Helvetica Neue', sans-serif;
-    min-width: 1350px;
 }
 li {
     list-style: none;
 }
 .header {
     background-color: white;
-    height: 95px;
+    height: 115px;
     position: relative;
+    white-space: nowrap;
 }
 
 .header-logo {
-    position: relative;
-    top: 30px;
-    left: 30px;
     display: inline-block;
     vertical-align: top;
+    padding: 44px 20px 0;
 }
 .header-logo__prefix {
     color: rgb(89, 194, 230);
     font-size: 20px;
     font-weight: bold;
     margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
 }
 .header-logo__image {
     height: 22px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .header-separator {
     border-right: 1px solid #AAA;
-    height: 60px;
+    height: 95px;
     display: inline-block;
     vertical-align: top;
     position: relative;
-    left: 60px;
     top: 10px;
 }
-.header-top-menu {
-    position: relative;
-    top: 20px;
-    left: 90px;
+.header-nav {
     display: inline-block;
-}
-.header-top-menu__item {
-    text-transform: uppercase;
-    font-size: 18px;
-    font-weight: bold;
-    padding: 5px 30px;
-    background-color: rgb(240, 243, 246);
-    color: rgb(79, 95, 111);
-}
-.header-top-menu__item--selected,
-.header-top-menu__item:hover {
-    background-color: rgb(89, 194, 230);
-    color: white;
-    cursor: pointer;
-}
-
-.header-row {
-    height: 47px;
-    position: relative;
+    vertical-align: top;
+    padding: 10px 0 0 20px;
 }
 .header-menu {
-    position: absolute;
-    bottom: 10px;
-    left: 350px;
-    margin: 0;
+    display: block;
     padding: 0;
-    display: none;
-}
-.header-menu--selected {
-    display: inline-block;
+    margin: 20px 0 0 0;
 }
 .header-menu__item {
     display: inline-block;
@@ -97,15 +72,13 @@ li {
 }
 
 .header-form {
-    position: absolute;
-    right: 15px;
-    top: 10px;
     color: rgb(79, 95, 111);
+    margin: 0;
 }
 
 .header-form__block {
     display: inline-block;
-    margin-right: 10px;
+    margin-right: 5px;
 }
 
 .header-form__block > label {
@@ -132,11 +105,11 @@ iframe {
     width: 99%;
     margin: auto;
     display: block;
-    height: 100%;
+    height: calc(100% - 30px);
 }
 
-.gridster {
-    padding-top: 30px;
+.content {
+    padding: 30px;
 }
 
 .gridster-layout {
@@ -149,19 +122,15 @@ iframe {
     border: 1px solid #EEE;
     position: relative;
 }
+
 .widget-title {
     font-size: 16px;
     font-weight: bold;
     color: rgb(89, 194, 230);
-    position: absolute;
     background-color: white;
-    width: 100%;
-    top: -30px;
     height: 30px;
-}
-
-.widget-title > span {
-    margin: 10px 0 0 10px;
-    display: inline-block;
+    line-height: 30px;
+    padding-left: 10px;
     white-space: nowrap;
 }
+
