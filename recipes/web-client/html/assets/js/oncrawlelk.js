@@ -99,17 +99,18 @@ $(function() {
      */
 
     var colsCount = 12;
-    var spacerCount = 30;
-    var spacerSize = spacerCount * colsCount;
+    var margin = 15;
+    var baseHeight = 150;
+    var baseWidth = 50;
 
     function reflowGridster() {
         var $container = $('.content');
         var g = $container.find('> .gridster > ul').data('gridster');
 
-        g.options.widget_margins = [spacerCount / 2, spacerCount];
-        g.options.widget_base_dimensions = [($container.width() - spacerSize) / colsCount, 120];
-        g.min_widget_width  = (g.options.widget_margins[0] * 2) + g.options.widget_base_dimensions[0];
-        g.min_widget_height = (g.options.widget_margins[1] * 2) + g.options.widget_base_dimensions[1];
+        var colSize = ($container.width() / colsCount) - (margin * 2);
+
+        g.options.widget_base_dimensions = [colSize, baseHeight];
+
         g.$widgets.each(function (i, widget) {
             g.resize_widget($(widget));
         });
@@ -117,6 +118,8 @@ $(function() {
         g.generate_grid_and_stylesheet();
         g.generate_stylesheet({ namespace: '.gridster' });
         g.get_widgets_from_DOM();
+        g.set_dom_grid_width();
+        g.set_dom_grid_height();
     }
 
     function newGridster() {
@@ -124,12 +127,12 @@ $(function() {
         $grid.removeData('gridster');
         $grid.html('');
 
-        var gridster = $('.gridster-layout').gridster({
+        var gridster = $grid.gridster({
             max_cols: colsCount,
             min_cols: colsCount,
             autogenerate_stylesheet: false,
-            widget_margins: [5, 5],
-            widget_base_dimensions: [50, 50]
+            widget_margins: [margin, margin],
+            widget_base_dimensions: [baseWidth, baseHeight]
         }).data('gridster');
         gridster.disable();
 
@@ -148,28 +151,24 @@ $(function() {
      * Navigation handling
      */
 
-    function isCategoryValid(id) {
-        return getCategory(id).length > 0;
-    }
-
     function isPageValid(id) {
         return getPageById(id).length > 0;
     }
 
     function openHashLocation() {
         var hash = getHashPath().split('/');
-        if (hash.length != 3) {
+        if (hash.length != 2) {
             return false;
         }
-        if (!isCategoryValid(hash[1]) || !isPageValid(hash[2])) {
+        if (!isPageValid(hash[1])) {
             return false;
         }
-        openCategory(hash[1], hash[2]);
+        openPage(hash[1]);
         return true;
     }
 
     function updateHashLocation() {
-        var hash = '#/' + getId(getCurrentCategory()) + '/' + getId(getCurrentPage());
+        var hash = '#/' + getId(getCurrentPage());
         if (Config.startingDate != undefined && Config.endingDate != undefined) {
             hash += '?' + Config.startingDate + ':' + Config.endingDate;
         }
@@ -180,8 +179,12 @@ $(function() {
         return $item.find('[name]').attr('name');
     }
 
+    function getPageMenu() {
+        return $('.header-menu');
+    }
+
     function getFirstPage() {
-        return getCurrentCategoryMenu().find('.header-menu__item:first');
+        return getPageMenu().find('.header-menu__item:first');
     }
 
     function getCurrentPage() {
@@ -201,69 +204,14 @@ $(function() {
         getPageById(id).addClass('header-menu__item--selected');
     }
 
-    function getFirstCategory() {
-        return $('.header-top-menu__item:first');
-    }
-
-    function getCurrentCategory() {
-        return $('.header-top-menu__item--selected');
-    }
-
-    function getCategory(id) {
-        return $('.header-top-menu a[name=' + id + ']').parent();
-    }
-
-    function getCurrentCategoryMenu() {
-        return $('.header-menu--selected');
-    }
-
-    function removeCurrentCategoryMenu() {
-        getCurrentCategoryMenu().removeClass('header-menu--selected');
-    }
-
-    function removeCurrentCategory() {
-        getCurrentCategory().removeClass('header-top-menu__item--selected');
-    }
-
-    function setCurrentCategory(id) {
-        removeCurrentCategory();
-        getCategory(id).addClass('header-top-menu__item--selected');
-    }
-
-    function getCategoryMenu(id) {
-        return $('.header-menu--' + id);
-    }
-
-    function setCurrentCategoryMenu(id) {
-        getCategoryMenu(id).addClass('header-menu--selected');
-    }
-
-    function openCategoryMenu(id) {
-        removeCurrentCategoryMenu();
-        setCurrentCategoryMenu(id);
-    }
-
-    function openCategory(id, pageId) {
-        removeCurrentCategory();
-        setCurrentCategory(id);
-        openCategoryMenu(id);
-        if (pageId == undefined) {
-            pageId = getId(getFirstPage());
-        }
-        openPage(pageId);
-    }
-
     function openPage(id) {
         removeCurrentPage();
         setCurrentPage(id);
-        addWidgets(newGridster(), Config.pages[getId(getCurrentCategory()) + '/' + id]);
+        addWidgets(newGridster(), Config.pages[id]);
         updateHashLocation();
     }
 
     function bindNavigationEvents() {
-        $('.header-top-menu [name]').on('click', function () {
-            openCategory($(this).attr('name'));
-        });
         $('.header-menu [name]').on('click', function () {
             openPage($(this).attr('name'));
         });
@@ -271,7 +219,7 @@ $(function() {
 
     bindNavigationEvents();
     if (!openHashLocation()) {
-        openCategory(getId(getFirstCategory()));
+        openPage(getId(getFirstPage()));
     }
 
 
@@ -289,9 +237,7 @@ $(function() {
     function getWidgetHtml(widget) {
         return [
             '<li class="widget">',
-            '  <div class="widget-title">',
-            '    <span>' + widget.title + '</span>' +
-            '  </div>' +
+            '  <div class="widget-title">' + widget.title + '</div>',
             '  <div class="widget-content">',
             '    <iframe src="' + buildUrl(widget.id) + '"></iframe>',
             '  </div>',
