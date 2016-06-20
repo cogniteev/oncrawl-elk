@@ -12,7 +12,7 @@ It is built with standard pillars such as ELK and docker.
 
 #### Install
 
-1. Clone this repository and checkout the `1.0` tag or simply download [1.0 zip](https://github.com/cogniteev/oncrawl-elk/archive/1.0.zip)
+1. Clone this repository and checkout the `1.1` tag or simply download [1.1 zip](https://github.com/cogniteev/oncrawl-elk/archive/1.1.zip)
 1. Starts the `OnCrawl ELK` containers using Docker Compose: `docker-compose -p oncrawlelk -f docker-compose.yml up -d`
 1. Visit [http://localhost:9000](http://localhost:9000) or `http://docker-host-ip:9000`. You should see the OnCrawl-ELK dashboard, but there is no data yet. Let's bring some data to analyze.
 
