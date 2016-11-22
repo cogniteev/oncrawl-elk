@@ -51,7 +51,7 @@ var Config = {
                 col: 1,
                 sizex: 6,
                 sizey: 3,
-                title: 'Top 50 pages crawled',
+                title: 'Top 50 crawled pages',
                 id: 'Top-pages-crawled-(50)'
             },
             {
@@ -59,7 +59,7 @@ var Config = {
                 col: 7,
                 sizex: 6,
                 sizey: 3,
-                title: 'Top 50 resources crawled',
+                title: 'Top 50 crawled resources',
                 id: 'Top-ressources-crawled-(50)'
             }
         ],
